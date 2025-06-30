@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TikTok OAuth Callback</title>
+</head>
+<body>
+  <h2>OAuth Callback</h2>
+  <p id="message">Waiting for TikTok to redirect...</p>
+  <script>
+    // Parse code from URL query params
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    if (code) {
+      document.getElementById("message").innerHTML = `
+        <b>Authorization code:</b> <code>${code}</code>
+        <br><br>
+        <button onclick="navigator.clipboard.writeText('${code}')">Copy Code</button>
+        <br><br>
+        <i>Paste this code in your backend/script to get your access token.</i>
+      `;
+    } else {
+      document.getElementById("message").innerText = "No authorization code found. Try authenticating again.";
+    }
+  </script>
+</body>
+</html>
